@@ -35,7 +35,7 @@ int main()
         while(!ack)
         {
             
-            send(socketdesc, &i, sizeof(i), 0);
+            
 
              
             send(socketdesc, clientmsg, sizeof(clientmsg), 0);

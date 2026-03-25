@@ -11,7 +11,7 @@ int main()
     socklen_t clientsize;
 
     char clientmsg[2000], servermsg[2000];
-    int frame, last_frame = -1;
+    
 
     socketdesc = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -30,9 +30,7 @@ int main()
     while(1)
     {
         
-        int n1 = recv(clientsock, &frame, sizeof(frame), 0);
-        if(n1 <= 0) break;
-
+        
         
         int n2 = recv(clientsock, clientmsg, sizeof(clientmsg), 0);
         if(n2 <= 0) break;
@@ -47,7 +45,7 @@ int main()
         {
     
             printf("Accepted: %s\n", clientmsg);
-            last_frame = frame;
+            
             
         }
         else
