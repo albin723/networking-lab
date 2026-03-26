@@ -14,13 +14,25 @@ int main()
     
 
     socketdesc = socket(AF_INET, SOCK_STREAM, 0);
-
+    if(socketdesc<0)
+    {
+        printf("couldnt create socket");
+        return -1;
+    }
+    printf("socket created");
     serveraddr.sin_family = AF_INET;
     serveraddr.sin_port = htons(8080);
     serveraddr.sin_addr.s_addr = inet_addr("127.0.0.1");
 
-    bind(socketdesc, (struct sockaddr*)&serveraddr, sizeof(serveraddr));
+    if(bind(socketdesc, (struct sockaddr*)&serveraddr, sizeof(serveraddr))<0)
+    {
+        printf("coudlnt bind\n");
+        return -1;
+    }
+    printf("binding done\n");
+
     listen(socketdesc, 1);
+    printf("listening for incoming connections...\n");
 
     clientsize = sizeof(clientaddr);
     clientsock = accept(socketdesc, (struct sockaddr*)&clientaddr, &clientsize);
